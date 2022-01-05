@@ -1,32 +1,42 @@
 import {
   Input, InputGroup, InputRightElement, Button, InputLeftElement, IconButton, Text,
 } from '@chakra-ui/react';
-import { VscSettings, VscSearch } from 'react-icons/vsc';
+import { VscArrowRight, VscSearch } from 'react-icons/vsc';
 
-export default function FilterSearch({ placeholder, onFilter, onSearch }) {
+export default function CustomSearch({
+  placeholder, onNext, handleSearch, borderRadius, disabled, onChange, value,
+}) {
   return (
     <InputGroup size="md">
-      <InputLeftElement width="4.5rem" marginLeft="3px">
+      <InputLeftElement width="3.7rem" marginLeft="4px">
         <Button
-          leftIcon={<VscSettings style={{ transform: 'rotate(90deg)' }} />}
+          leftIcon={<VscArrowRight />}
           size="sm"
           backgroundColor="white"
           shadow="sm"
-          borderRadius="3px"
+          borderRadius={borderRadius}
           _hover={{ bg: 'gray.500', color: 'gray.100' }}
-          onClick={onFilter}
+          onClick={onNext}
+          disabled={disabled}
         >
-          <Text marginTop="2px" fontSize="13px">Filter</Text>
+          <Text marginTop="2px" fontSize="13px" marginLeft="-5px">Next</Text>
         </Button>
       </InputLeftElement>
       <Input
         type="text"
         placeholder={placeholder}
-        paddingLeft="5rem"
+        paddingX="6rem"
         fontSize="13px"
-        borderRadius="3px"
+        borderRadius={borderRadius}
         backgroundColor="gray.100"
         focusBorderColor="gray.300"
+        textAlign="center"
+        color="gray.500"
+        onChange={(e) => onChange(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') handleSearch();
+        }}
+        value={value}
       />
       <InputRightElement>
         <IconButton
@@ -34,9 +44,9 @@ export default function FilterSearch({ placeholder, onFilter, onSearch }) {
           backgroundColor="white"
           size="sm"
           shadow="sm"
-          borderRadius="3px"
+          borderRadius={borderRadius}
           _hover={{ bg: 'gray.500', color: 'gray.100' }}
-          onClick={onSearch}
+          onClick={handleSearch}
         />
       </InputRightElement>
     </InputGroup>
