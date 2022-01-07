@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "https://github.com/1stdeddy2nd/next-js-unplash-chakra-ui/blob/main/prisma/dev.db"
 }
 
 model User {
